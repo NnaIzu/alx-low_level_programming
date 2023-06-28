@@ -3,10 +3,11 @@
 /**
  * _puts - prints a string
  * @str: String to be printed
- * Return: (0)
+ * Return: void
  */
 
 void _puts(char *str)
+
 {
 	for (; *str != '\0'; str++)
 	{
