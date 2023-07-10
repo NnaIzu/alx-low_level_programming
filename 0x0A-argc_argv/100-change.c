@@ -1,12 +1,11 @@
-#include "main.h"
 #include <stdio.h>
 #include <stdlib.h>
 
 /**
  * main - function to generate change from coins
  * @argc: argument count
- * @argc: argument vector
- * Return: if number of argment is one - 1, otherwise 0
+ * @argv: argument vector
+ * Return: if number of arguments is one - 1, otherwise 0
  */
 
 int main(int argc, char *argv[])
