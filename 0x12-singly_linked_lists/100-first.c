@@ -6,7 +6,7 @@ void first(void) __attribute__ ((constructor));
 /**
  * first - to print a statement before the main function
  * is executed
- * 
+ *
  * Return (0)
  */
 
