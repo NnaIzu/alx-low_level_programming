@@ -3,51 +3,52 @@
 #include <stdio.h>
 
 /**
- * print_all - prints anything
- * @format: all typers of argument passed to
+ * print_all - function to print anything
+ * @format: all types of argument passed to
  *	the function
  * @...: variable number of strings
  */
 
 void print_all(const char * const format, ...)
 {
-	int i = 0;
-	char *str, *sep = "";
+	va_list valist;
+	unsigned int n = 0, k, c = 0;
+	char *str;
+	const char t_arg[] = "cifs";
 
-	va_list list;
-
-	va_start(list, format);
-
-	if (format)
+	va_start(valist, format);
+	while (format && format[n])
 	{
-		while (format[i])
+		k = 0;
+		while (t_arg[k])
 		{
-			switch (format[i])
+			if (format[n] == t_arg[k] && c)
+			{
+				printf(",");
+				break;
+			} k++;
+		}
+		switch (format[n])
 		{
-			case 'c':
-				printf("%s%c", sep, va_arg(list, int));
+		case 'c':
+			printf("%c", va_arg(valist, int)), c = 1;
+			break;
+		case 'i':
+			printf("%d", va_arg(valist, int)), c = 1;
+			break;
+		case 'f':
+			printf("%f", va_arg(valist, double)), c = 1;
+			break;
+		case 's':
+			str = va_arg(valist, char *), c = 1;
+			if (!str)
+			{
+				printf("(nil)");
 				break;
-			case 'i':
-				printf("%s%d", sep, va_arg(list, int));
-				break;
-			case 'f':
-				printf("%s%f", sep, va_arg(list, double));
-				break;
-			case 's':
-				str = va_arg(list, char *);
-				if (!str)
-					str = "(nil)";
-				printf("%s%s", sep, str);
-				break;
-			default:
-				i++;
-				continue;
-		}
-		sep = ",";
-		i++;
-		}
+			}
+			printf("%s", str);
+			break;
+		} n++;
 	}
-
-	printf("\n");
-	va_end(list);
+	printf("\n"), va_end(valist);
 }
